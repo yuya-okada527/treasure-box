@@ -1,9 +1,9 @@
 run:
-	flutter run
+	fvm flutter run
 open:
 	open -a Simulator
 format:
-	flutter format lib
-	flutter format test
+	fvm flutter format lib
+	fvm flutter format test
 install:
-	flutter pub get
+	fvm flutter pub get
