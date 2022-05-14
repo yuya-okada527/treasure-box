@@ -5,3 +5,5 @@ open:
 format:
 	flutter format lib
 	flutter format test
+install:
+	flutter pub get
