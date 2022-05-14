@@ -1,0 +1,17 @@
+@startuml erd
+entity Disc {
+  + id [PK] int
+  --
+  artist_id [FK] int
+  name varchar(128)
+}
+
+
+entity Artist {
+  + id [PK] int
+  --
+  name varchar(128)
+}
+
+Disc }|- Artist
+@enduml
