@@ -3,7 +3,7 @@ entity Disc {
   + id [PK] int
   --
   artist_id [FK] int
-  name varchar(128)
+  title varchar(128)
 }
 
 

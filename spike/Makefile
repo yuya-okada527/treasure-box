@@ -1,9 +1,11 @@
 run:
-	fvm flutter run
+	flutter run
 open:
 	open -a Simulator
 format:
-	fvm flutter format lib
-	fvm flutter format test
+	flutter format lib
+	flutter format test
 install:
-	fvm flutter pub get
+	flutter pub get
+migrate:
+	flutter pub run build_runner watch --delete-conflicting-outputs
