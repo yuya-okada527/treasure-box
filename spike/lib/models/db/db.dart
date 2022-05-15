@@ -24,4 +24,8 @@ class Database extends _$Database {
   Database() : super(_openConnection());
   @override
   int get schemaVersion => 1;
+
+  Future<List<DiscData>> readAllDisc() => select(disc).get();
+
+  Future writeDisc(DiscCompanion data) => into(disc).insert(data);
 }
