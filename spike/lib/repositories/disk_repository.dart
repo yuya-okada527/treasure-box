@@ -1,4 +1,4 @@
-import 'package:spike/database.dart';
+import 'package:spike/config/database.dart';
 import 'package:spike/models/disk_model.dart';
 
 class DiskRepository {
