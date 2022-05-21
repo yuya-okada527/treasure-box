@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:spike/models/disk_model.dart';
+import 'package:spike/repositories/disk_repository.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,11 +31,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  List<DiskModel> _disks = [];
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  @override
+  void initState() {
+    super.initState();
+    Future(() async {
+      await _reload();
     });
   }
 
@@ -44,24 +48,26 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        child: ListView.builder(
+          itemCount: _disks.length,
+          itemBuilder: (context, index) {
+            return Text(_disks[index].title ?? "no title");
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () async {
+          await _reload();
+        },
         child: const Icon(Icons.add),
       ),
     );
+  }
+
+  Future<void> _reload() async {
+    List<DiskModel> disks = await DiskRepository.selectAll();
+    setState(() {
+      _disks = disks;
+    });
   }
 }
