@@ -9,3 +9,5 @@ install:
 	fvm flutter pub get
 migrate:
 	fvm flutter pub run build_runner watch --delete-conflicting-outputs
+setup:
+	mv .env.sample .env

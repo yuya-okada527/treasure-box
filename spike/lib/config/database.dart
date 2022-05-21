@@ -1,3 +1,4 @@
+import 'package:spike/config/settings.dart';
 import 'package:spike/models/disk_model.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
@@ -22,7 +23,7 @@ Future<Database> getDatabase() async {
       _onCreate(db);
     },
     onOpen: (db) async {
-      if (true) {
+      if (Settings.isLocalOrTest) {
         await _deleteTables(db);
         _onCreate(db);
       }
