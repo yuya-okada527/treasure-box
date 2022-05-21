@@ -29,11 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # ORM
-  drift: ^1.6.0
-  sqlite3_flutter_libs: ^0.5.0
-  path_provider: ^2.0.0
-  path: ^1.8.1
+  # sqlite
+  sqflite:
+  path:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -42,9 +40,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  # ORM
-  drift_dev: ^1.6.0
-  build_runner: ^2.1.10
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
