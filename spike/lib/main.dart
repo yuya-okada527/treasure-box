@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:spike/models/disk_model.dart';
 import 'package:spike/repositories/disk_repository.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load();
   runApp(const MyApp());
 }
 
@@ -57,6 +60,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          await DiskRepository.insert(
+            DiskModel(title: "title")
+          );
           await _reload();
         },
         child: const Icon(Icons.add),
