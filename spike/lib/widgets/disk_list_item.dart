@@ -11,9 +11,16 @@ class DiskListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         children: <Widget>[
-          Image.asset("images/murmur.jpg"),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset("images/murmur.jpg", fit: BoxFit.fill),
+          ),
+          // Image.asset("images/murmur.jpg", fit: BoxFit.fill),
           Text(disk.title ?? "Murmur")
         ],
       ),

@@ -63,10 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           var db = await getDatabase();
-          await DiskRepository.insert(
-            db,
-            DiskModel(title: "title")
-          );
+          await DiskRepository.insert(db, DiskModel(title: "title"));
           await _reload();
         },
         child: const Icon(Icons.add),
