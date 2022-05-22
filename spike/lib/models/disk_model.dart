@@ -1,8 +1,12 @@
 class DiskModel {
-  final int? id;
-  final String? title;
+  int? id;
+  String? title;
 
   DiskModel({this.id, this.title});
+  DiskModel.fromMap(Map<String, dynamic> map) {
+    id = map["id"];
+    title = map["title"];
+  }
 
   Map<String, dynamic> toMap() {
     return {"id": id, "title": title};

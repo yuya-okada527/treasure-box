@@ -5,7 +5,7 @@ class DiskRepository {
   static Future<List<DiskModel>> selectAll(Database db) async {
     final List<Map<String, dynamic>> maps = await db.query("disks");
     return List.generate(maps.length, (index) {
-      return DiskModel(id: maps[index]["id"], title: maps[index]["title"]);
+      return DiskModel.fromMap(maps[index]);
     });
   }
 
