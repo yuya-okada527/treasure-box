@@ -5,6 +5,10 @@ class Settings {
     return dotenv.env["ENV"] ?? "local";
   }
 
+  static bool get isTest {
+    return env == "test";
+  }
+
   static bool get isLocalOrTest {
     return ["local", "test"].contains(env);
   }

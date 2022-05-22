@@ -1,6 +1,7 @@
 import 'package:spike/config/settings.dart';
 import 'package:spike/models/disk_model.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'dart:async';
 import 'package:path/path.dart';
 
@@ -17,17 +18,41 @@ Future<void> _deleteTables(Database db) async {
 }
 
 Future<Database> getDatabase() async {
-  return openDatabase(
-    join(await getDatabasesPath(), "database.db"),
-    onCreate: (db, version) {
-      _onCreate(db);
-    },
-    onOpen: (db) async {
-      if (Settings.isLocalOrTest) {
-        await _deleteTables(db);
-        _onCreate(db);
-      }
-    },
-    version: 1,
-  );
+  switch (Settings.env) {
+    case "local":
+      return openDatabase(
+        join(await getDatabasesPath(), "database.db"),
+        onCreate: (db, version) {
+          _onCreate(db);
+        },
+        onOpen: (db) async {
+          await _deleteTables(db);
+          _onCreate(db);
+        },
+        version: 1,
+      );
+    case "test":
+      sqfliteFfiInit();
+      var databaseFactory = databaseFactoryFfi;
+      var options = OpenDatabaseOptions(
+        onOpen: (db) async {
+          await _deleteTables(db);
+          _onCreate(db);
+        },
+        version: 1,
+        singleInstance: false,
+      );
+      return databaseFactory.openDatabase(
+        join(await getDatabasesPath(), "database.db"),
+        options: options,
+      );
+    default:
+      return openDatabase(
+        join(await getDatabasesPath(), "database.db"),
+        onCreate: (db, version) {
+          _onCreate(db);
+        },
+        version: 1,
+      );
+  }
 }
