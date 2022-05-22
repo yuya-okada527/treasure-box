@@ -43,7 +43,7 @@ Future<Database> getDatabase() async {
         singleInstance: false,
       );
       return databaseFactory.openDatabase(
-        join(await getDatabasesPath(), "database.db"),
+        join(await databaseFactory.getDatabasesPath(), "database.db"),
         options: options,
       );
     default:

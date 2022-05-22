@@ -4,8 +4,9 @@ open:
 	open -a Simulator
 format:
 	fvm flutter format lib
-test:
-	ENV=test fvm flutter format test
+	fvm flutter format test
+testing:
+	fvm flutter test
 install:
 	fvm flutter pub get
 migrate:

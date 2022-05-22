@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:spike/config/database.dart';
 import 'package:spike/models/disk_model.dart';
 import 'package:spike/repositories/disk_repository.dart';
 
@@ -60,7 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          var db = await getDatabase();
           await DiskRepository.insert(
+            db,
             DiskModel(title: "title")
           );
           await _reload();
@@ -71,7 +74,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _reload() async {
-    List<DiskModel> disks = await DiskRepository.selectAll();
+    var db = await getDatabase();
+    List<DiskModel> disks = await DiskRepository.selectAll(db);
     setState(() {
       _disks = disks;
     });
