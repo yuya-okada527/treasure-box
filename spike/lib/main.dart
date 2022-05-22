@@ -3,6 +3,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:spike/config/database.dart';
 import 'package:spike/models/disk_model.dart';
 import 'package:spike/repositories/disk_repository.dart';
+import 'package:spike/widgets/disk_list_item.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ListView.builder(
           itemCount: _disks.length,
           itemBuilder: (context, index) {
-            return Text(_disks[index].title ?? "no title");
+            return DiskListItem(disk: _disks[index]);
           },
         ),
       ),
